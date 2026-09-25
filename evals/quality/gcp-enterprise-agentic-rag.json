@@ -1,0 +1,64 @@
+{
+  "skill_name": "gcp-enterprise-agentic-rag",
+  "version": "1.0.0",
+  "evals": [
+    {
+      "id": "eval-01-scaffold",
+      "name": "multi-agent-memory-scaffold",
+      "prompt": "I need to build a customer support multi-agent application on Google Cloud using ADK. It needs a root coordinator (root_agent) and two specialized sub-agents (billing and technical support). The system must persist session history using VertexAiSessionService and retain user preferences across sessions using VertexAiMemoryBankService.",
+      "expected_output": "A production multi-agent project layout with root_agent/agent.py exporting root_agent, session_service_builder, memory_service_builder, and app, along with verified .env configuration.",
+      "files": [
+        "evals/fixtures/sample_env.txt"
+      ],
+      "assertions": [
+        "The scaffolded agent exports root_agent, session_service_builder, memory_service_builder, and app",
+        "The root agent configures sub-agents with dedicated instructions and tool bindings",
+        "VertexAiMemoryBankService is initialized with asynchronous callback handling",
+        "scripts/validate_agent.py completes with exit code 0 against the scaffolded directory"
+      ]
+    },
+    {
+      "id": "eval-02-privacy-rag",
+      "name": "closed-loop-privacy-rag",
+      "prompt": "Set up a serverless closed-loop RAG knowledge pipeline on GCP where chat transcripts stream through Pub/Sub, sensitive PII (SSNs, emails, credit cards) is de-identified using Cloud DLP before writing to BigQuery, and scheduled BigQuery ML text summarization loads insights into Vertex AI Search.",
+      "expected_output": "Gen 2 Cloud Function with Cloud DLP redaction, BigQuery dataset and table schemas, setup_bq_ml.sh ETL automation, and setup_vertex_search.py script.",
+      "files": [
+        "evals/fixtures/sample_transcript.json"
+      ],
+      "assertions": [
+        "Cloud Function main.py implements Cloud DLP de-identification before BigQuery table insertion",
+        "setup_bq_ml.sh creates the BigQuery Cloud Resource Connection and remote Gemini LLM model",
+        "Scheduled query extracts insights into the extracted_insights BigQuery table",
+        "setup_vertex_search.py provisions a Vertex AI Search Data Store and App connected to BigQuery"
+      ]
+    },
+    {
+      "id": "eval-03-deployment-telemetry",
+      "name": "agent-runtime-deployment-telemetry",
+      "prompt": "Generate the deployment configuration to deploy our ADK multi-agent app to Vertex AI Agent Runtime (Agent Engine) with full OpenTelemetry tracing exported to Google Cloud Trace.",
+      "expected_output": "deploy_agent_engine.py utilizing AdkApp with OpenTelemetry environment variables and verify_deployment.py validation script.",
+      "files": [
+        "evals/fixtures/sample_env.txt"
+      ],
+      "assertions": [
+        "deploy_agent_engine.py initializes AdkApp with root_agent and project configuration",
+        "OpenTelemetry environment flags OTEL_SEMCONV_STABILITY_OPT_IN and GOOGLE_CLOUD_PROJECT are configured",
+        "scripts/verify_deployment.py tests live query routing and deployment verification"
+      ]
+    },
+    {
+      "id": "eval-04-boundary-validation",
+      "name": "boundary-prereq-validation-handling",
+      "prompt": "Run pre-deployment environment validation against a misconfigured project missing required environment variables and verify that validation fails gracefully with actionable error messages.",
+      "expected_output": "scripts/validate_agent.py detects missing keys and exits with code 1, reporting missing variables.",
+      "files": [
+        "evals/fixtures/invalid_env.txt"
+      ],
+      "assertions": [
+        "validate_agent.py checks .env for GOOGLE_CLOUD_PROJECT, GOOGLE_CLOUD_REGION, and STORAGE_BUCKET",
+        "validate_agent.py exits with non-zero status code when required configuration is missing",
+        "scripts/check_prereqs.sh verifies required IAM role bindings including aiplatform and bigquery"
+      ]
+    }
+  ]
+}

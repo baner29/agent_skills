@@ -23,6 +23,8 @@ gcloud services enable \
     logging.googleapis.com \
     monitoring.googleapis.com \
     cloudtrace.googleapis.com \
+    eventarc.googleapis.com \
+    eventarcpublishing.googleapis.com \
     --project="<gcp_project_id>"
 ```
 
@@ -63,6 +65,15 @@ for ROLE in \
       --member="serviceAccount:${SA_EMAIL}" \
       --role="${ROLE}"
 done
+```
+
+### Cloud Function Gen 2 Builder Role
+For Cloud Functions Gen 2 triggered by Pub/Sub, grant `roles/cloudbuild.builds.builder` to the default compute service account:
+```bash
+PROJECT_NUMBER=$(gcloud projects describe "<gcp_project_id>" --format="value(projectNumber)")
+gcloud projects add-iam-policy-binding "<gcp_project_id>" \
+    --member="serviceAccount:${PROJECT_NUMBER}-compute@developer.gserviceaccount.com" \
+    --role="roles/cloudbuild.builds.builder"
 ```
 
 ## 3. Recommended Coding Agent Tooling

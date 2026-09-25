@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 PROJECT_ID = os.environ.get("GOOGLE_CLOUD_PROJECT") or os.environ.get("PROJECT_ID")
-LOCATION = os.environ.get("GOOGLE_CLOUD_REGION", "europe-west1")
+LOCATION = os.environ.get("GOOGLE_CLOUD_REGION", "us-central1")
 STORAGE_BUCKET = os.environ.get("STORAGE_BUCKET")
 SERVICE_NAME = os.environ.get("SERVICE_NAME", "enterprise_agent_adk")
 AGENT_ENGINE_ID = os.environ.get("AGENT_ENGINE_ID")
@@ -77,16 +77,20 @@ def main():
         "GOOGLE_GENAI_USE_VERTEXAI": "1",
         "GOOGLE_CLOUD_REGION": LOCATION,
         "STORAGE_BUCKET": STORAGE_BUCKET,
-        "GOOGLE_CLOUD_MODEL": os.environ.get("GOOGLE_CLOUD_MODEL", "gemini-3.8-flash"),
+        "GOOGLE_CLOUD_MODEL": os.environ.get("GOOGLE_CLOUD_MODEL", "gemini-2.5-flash"),
         "SERVICE_NAME": SERVICE_NAME,
-        "AGENT_ENGINE_ID": target_engine_id or "",
     }
+    if target_engine_id:
+        env_vars["AGENT_ENGINE_ID"] = target_engine_id
 
     # Pass through optional keys if present
     for opt_key in ["VERTEX_SEARCH_DATA_STORE_ID", "GITHUB_TOKEN"]:
         val = os.environ.get(opt_key)
         if val:
             env_vars[opt_key] = val
+
+    # Filter out empty strings to comply with Vertex AI Reasoning Engine constraint
+    env_vars = {k: v for k, v in env_vars.items() if v}
 
     extra_packages = ["./root_agent"]
     requirements = "requirements.txt"

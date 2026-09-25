@@ -1,0 +1,11 @@
+# GCP Enterprise Agent Environment Configuration
+GOOGLE_CLOUD_PROJECT=test-agent-project-123
+GOOGLE_CLOUD_REGION=us-central1
+STORAGE_BUCKET=test-agent-project-123-bucket
+AGENT_NAME=enterprise-customer-agent
+VERTEX_AI_MODEL=gemini-2.5-flash
+PUBSUB_TRANSCRIPT_TOPIC=agent-session-transcripts
+BIGQUERY_DATASET_ID=global_agent_knowledge
+BIGQUERY_CONNECTION_ID=vertex-remote-llm
+VERTEX_SEARCH_DATA_STORE_ID=global-agent-knowledge-store
+OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai

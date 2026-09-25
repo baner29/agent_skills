@@ -1,0 +1,3 @@
+# Invalid Environment Configuration (Missing required keys)
+AGENT_NAME=enterprise-customer-agent
+SOME_OTHER_KEY=value

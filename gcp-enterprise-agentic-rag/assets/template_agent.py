@@ -23,8 +23,8 @@ load_dotenv()
 logger = logging.getLogger(__name__)
 
 PROJECT_ID = os.environ.get("GOOGLE_CLOUD_PROJECT") or os.environ.get("PROJECT_ID")
-REGION = os.environ.get("GOOGLE_CLOUD_REGION", "europe-west1")
-MODEL_NAME = os.environ.get("GOOGLE_CLOUD_MODEL", "gemini-3.8-flash")
+REGION = os.environ.get("GOOGLE_CLOUD_REGION", "us-central1")
+MODEL_NAME = os.environ.get("GOOGLE_CLOUD_MODEL", "gemini-2.5-flash")
 AGENT_ENGINE_ID = os.environ.get("AGENT_ENGINE_ID")
 DATA_STORE_ID = os.environ.get("VERTEX_SEARCH_DATA_STORE_ID")
 

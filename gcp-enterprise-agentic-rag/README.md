@@ -2,32 +2,28 @@
 
 > Standardized, serverless multi-agent RAG framework on Google Cloud Platform.
 
-This skill makes your coding agents build, configure, validate, and deploy an enterprise-grade multi-agent system on Vertex AI Agent Runtime with automated memory bank persistence, Cloud DLP privacy redaction, BigQuery ML, and Vertex AI Search.
+This skill equips coding agents to scaffold, configure, validate, and deploy enterprise multi-agent systems on Vertex AI Agent Runtime with persistent memory banks, Cloud DLP privacy redaction, BigQuery ML summarization, and Vertex AI Search.
 
-![1790213650772](image/README/1790213650772.jpg)
+![Architecture Diagram](image/README/1790213650772.jpg)
 
-Goal
-----
+## Overview
 
-Deploying a production grade agentic application requires lot of work, including - choosing the right set of tools - orchestrator, model, short-term memory (sessions), long-term memory, PII masking, logging and monitoring, security, agent-tools, policies, search engine (RAG), and evaluation. After deciding the tools, the next big challenge is how to connect these tools together (designing the architecture). The final headache is where to deploy and ensure your agents are accessible to your team mates and others who you want to access these agents.
+Building production-grade agent systems involves significant infrastructure and integration overhead: selecting orchestrators and models, managing session and cross-session memory, masking PII, wiring RAG pipelines, configuring telemetry, and managing deployments.
 
-This skill does this heavy lifting for you. It is designed after learning from mutliple production grade agentic architectures which are used by various teams within an enterprise.
+This skill automates that boilerplate using proven enterprise multi-agent patterns on Google Cloud Platform, letting you focus on domain logic and tool implementation.
 
-The goal is simple, developing and deploying an agent should be the least effort task. The focus should be on the core logic of your agents.
+## Workflow
 
-How it works?
--------------
+The skill automates the complete lifecycle in eight structured phases:
 
-This skill encapsulates the work into 8 different steps. Each step performs key operation that results deployment of a major aspect of the agent. Let's look at each of these steps briefly:
-
-1. **Ask questions:** First step of this skill is to ask the user fundamental clarifying questions like name of the application, gcp-project-id, region of deployment, number of sub-agents and their job, etc.
-2. **Pre-requisite setup:** Then it executes few pre-requisite actions like enabling GCP APIs, granting permissions, adding agent skills, plugins, and mcp-servers.
-3. **Writing the code:** Then it writes the boilerplate code for ADK orchestration, Vertex AI runtime engine, and DLP functions.
-4. **Pre-deployment validation:** Runs automated validations to test the foundational code.
-5. **RAG & DLP setup:** It then executes setup queries for deploying RAG and DLP pipelines.
-6. **Vertex AI Agent Runtime setup:** It then deploys the agent runtime on vertex AI.
-7. **Post-deployment validations:** It executes post-deployment validation queries to test the working of the agent on the agent runtime.
-8. **Generate documentation:** Finally, it generates a comprehensive README.md file capturing the detailed working of the agent, how to use it on the Agent Runtime, and how to test it using the Playground on the GCP console.
+1. **Requirements Discovery**: Collects application scope, sub-agent roles, tool requirements, GCP project details, and target regions.
+2. **Prerequisites & IAM**: Verifies and enables GCP APIs, creates dedicated service accounts, and binds least-privilege IAM roles.
+3. **Codebase Scaffolding**: Generates Google ADK multi-agent structures with root orchestration, sub-agents, and session/memory service builders.
+4. **Pre-Deployment Validation**: Runs local static and behavioral checks against the generated code before provisioning cloud resources.
+5. **RAG & Privacy Pipeline**: Sets up streaming telemetry via Pub/Sub, Cloud DLP de-identification, BigQuery ML summarization models, and Vertex AI Search data stores.
+6. **Agent Engine Deployment**: Deploys the multi-agent package to Vertex AI Agent Runtime with OpenTelemetry Cloud Trace integration.
+7. **Post-Deployment Verification**: Runs live queries against the deployed runtime to confirm routing, memory retention, and telemetry.
+8. **Documentation**: Produces a root `README.md` with system architecture diagrams, environment configurations, and GCP Console Playground instructions.
 
 ## Installation via `skills.sh` / `npx`
 
@@ -59,8 +55,6 @@ npx skills add https://github.com/baner29/agent_skills --skill gcp-enterprise-ag
 
 ## Directory Structure
 
-Conforming to the Agent Skills standard with progressive disclosure:
-
 ```text
 gcp-enterprise-agentic-rag/
 ├── SKILL.md                 # Core instructions, checklist & pointers (<150 lines)
@@ -76,21 +70,11 @@ gcp-enterprise-agentic-rag/
 ├── scripts/                 # Self-contained validation and automation scripts
 │   ├── check_prereqs.sh     # Infrastructure pre-requisites verification
 │   ├── setup_bq_ml.sh       # BigQuery ML & Cloud Resource Connection automated setup
+│   ├── setup_vertex_search.py # Vertex AI Search Data Store & Search App setup
 │   ├── validate_agent.py    # Pre-deployment codebase self-validation loop
 │   └── verify_deployment.py # Post-deployment live GCP self-validation
 └── assets/                  # Starter code templates
     ├── template_agent.py    # Orchestrator & sub-agent starter template
     ├── template_deploy.py   # Agent Runtime deployment template
     └── template_cf_main.py  # Cloud Function Gen 2 with Cloud DLP sanitization
-```
-
----
-
-## Specification Validation
-
-Verify that this skill conforms to the Agent Skills specification:
-
-```bash
-npx skills-ref validate .
-npx skills-ref read-properties .
 ```

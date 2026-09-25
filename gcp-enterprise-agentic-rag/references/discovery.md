@@ -20,6 +20,19 @@ Ask the user the following structured questions:
 6. **Cloud Storage Staging Bucket**: GCS bucket for Agent Runtime artifacts and session persistence (e.g., `<app-name>-staging-<project-id>`).
 7. **Service Account**: Existing Service Account email to execute the agent, or permission to create a new dedicated one (e.g., `<app-name>-sa@<project-id>.iam.gserviceaccount.com`).
 8. **Global Knowledge Base (RAG) Dataset**: BigQuery dataset name for sanitized session transcripts and extracted insights (Default: `global_agent_knowledge`).
-9. **Interface Adapter Preferences**: Desired user entrypoints (e.g., Google Chat Webhook, Slack bot, lightweight web chat adapter).
+9. **LLM Model**: Model identifier to power the agents (Default: `gemini-2.5-flash`).
+   - *Notice: Ensure the chosen model is available and supported in the specified GCP region.*
+10. **Interface Adapter Preferences**: Desired user entrypoints (e.g., GCP console agent playground, Google Chat Webhook, Slack bot, lightweight web chat adapter).
 
-*(The LLM model defaults to `gemini-3.8-flash` unless the user specifies otherwise).*
+---
+
+## Pre-Flight Regional Model Check
+
+Prior to generating code or scaffolding the project, the agent must verify that the selected model is active and accessible in the target region by executing a minimal test generation:
+
+```bash
+python3 -c "from google import genai; client = genai.Client(vertexai=True, project='<gcp_project_id>', location='<gcp_region>'); client.models.generate_content(model='<model_id>', contents='ping')"
+```
+
+If the endpoint returns `404 NOT_FOUND`, notify the user immediately and select an available model for that region (e.g., `gemini-2.5-flash`).
+

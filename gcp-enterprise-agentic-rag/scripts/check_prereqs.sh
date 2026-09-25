@@ -50,6 +50,8 @@ REQUIRED_APIS=(
   "logging.googleapis.com"
   "monitoring.googleapis.com"
   "cloudtrace.googleapis.com"
+  "eventarc.googleapis.com"
+  "eventarcpublishing.googleapis.com"
 )
 
 echo "Checking required APIs..."
@@ -73,8 +75,29 @@ else
   echo "✅ All required APIs are already enabled."
 fi
 
-# 4. Check Service Account if provided
+# 4. Check & Grant Cloud Build builder role to default compute SA
+PROJECT_NUMBER=$(gcloud projects describe "${PROJECT_ID}" --format="value(projectNumber)")
+COMPUTE_SA="${PROJECT_NUMBER}-compute@developer.gserviceaccount.com"
+echo "Ensuring Cloud Build builder role on compute SA: ${COMPUTE_SA}..."
+gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
+  --member="serviceAccount:${COMPUTE_SA}" \
+  --role="roles/cloudbuild.builds.builder" > /dev/null 2>&1 || true
+echo "✅ Cloud Build builder role verified."
+
+# 5. Check Service Account if provided
 if [ -n "$SA_EMAIL" ]; then
+  echo "Checking service account existence: ${SA_EMAIL}..."
+  if ! gcloud iam service-accounts describe "${SA_EMAIL}" --project="${PROJECT_ID}" &>/dev/null; then
+    SA_NAME=$(echo "$SA_EMAIL" | cut -d'@' -f1)
+    echo "Creating service account: ${SA_NAME}..."
+    gcloud iam service-accounts create "${SA_NAME}" \
+      --display-name="Agent Service Account" \
+      --project="${PROJECT_ID}"
+    echo "✅ Created service account: ${SA_EMAIL}"
+  else
+    echo "✅ Service account exists."
+  fi
+
   echo "Checking IAM bindings for: ${SA_EMAIL}..."
   PROJECT_POLICY=$(gcloud projects get-iam-policy "${PROJECT_ID}" --format=json)
   REQUIRED_ROLES=(

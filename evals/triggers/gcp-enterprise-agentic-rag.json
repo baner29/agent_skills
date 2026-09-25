@@ -1,0 +1,102 @@
+[
+  {
+    "id": "trigger-01",
+    "query": "I want to build a customer support multi-agent application on GCP using ADK with a coordinator and billing/tech sub-agents. It needs to remember past user conversations using Vertex AI Memory Bank.",
+    "should_trigger": true
+  },
+  {
+    "id": "trigger-02",
+    "query": "Help me scaffold and deploy a serverless multi-agent system to Vertex AI Agent Engine with session persistence and OpenTelemetry Cloud Trace instrumentation.",
+    "should_trigger": true
+  },
+  {
+    "id": "trigger-03",
+    "query": "We need an enterprise RAG pipeline on Google Cloud that streams chat transcripts to BigQuery, redacts PII with Cloud DLP, and runs scheduled BigQuery ML text extraction into Vertex AI Search.",
+    "should_trigger": true
+  },
+  {
+    "id": "trigger-04",
+    "query": "Scaffold an ADK multi-agent app with root_agent, session_service_builder, and memory_service_builder.",
+    "should_trigger": true
+  },
+  {
+    "id": "trigger-05",
+    "query": "How do I deploy an AdkApp package to Google Cloud Vertex AI Agent Runtime with least-privilege IAM service accounts?",
+    "should_trigger": true
+  },
+  {
+    "id": "trigger-06",
+    "query": "I have an agent in root_agent/agent.py and want to validate its exports before deploying to Agent Engine.",
+    "should_trigger": true
+  },
+  {
+    "id": "trigger-07",
+    "query": "Set up a Cloud Function Gen 2 to sanitize user messages in Pub/Sub with Cloud DLP before writing to BigQuery for agent memory.",
+    "should_trigger": true
+  },
+  {
+    "id": "trigger-08",
+    "query": "Can you configure a Vertex AI Search data store on top of our BigQuery sanitized transcripts dataset for closed-loop RAG?",
+    "should_trigger": true
+  },
+  {
+    "id": "trigger-09",
+    "query": "I need to fix BigQuery Connection Service Account permissions for remote Gemini ML models in GCP.",
+    "should_trigger": true
+  },
+  {
+    "id": "trigger-10",
+    "query": "Scaffold a production GCP multi-agent workflow that persists cross-session user preferences.",
+    "should_trigger": true
+  },
+  {
+    "id": "near-miss-01",
+    "query": "Write a python script that connects to BigQuery and exports a table to a local CSV file.",
+    "should_trigger": false
+  },
+  {
+    "id": "near-miss-02",
+    "query": "How do I deploy a FastAPI application to Google Cloud Run using Docker?",
+    "should_trigger": false
+  },
+  {
+    "id": "near-miss-03",
+    "query": "Create an AWS Bedrock multi-agent system using LangGraph and DynamoDB session storage.",
+    "should_trigger": false
+  },
+  {
+    "id": "near-miss-04",
+    "query": "Write a single-turn Gemini 1.5 Pro prompt to summarize this PDF document.",
+    "should_trigger": false
+  },
+  {
+    "id": "near-miss-05",
+    "query": "Set up a Google Cloud Pub/Sub topic and subscription using Terraform for IoT telemetry.",
+    "should_trigger": false
+  },
+  {
+    "id": "near-miss-06",
+    "query": "Write a bash script to install Google Cloud SDK and authenticate with gcloud auth login.",
+    "should_trigger": false
+  },
+  {
+    "id": "near-miss-07",
+    "query": "How do I create a standard Postgres database on Cloud SQL and run migrations with Alembic?",
+    "should_trigger": false
+  },
+  {
+    "id": "near-miss-08",
+    "query": "Write a unit test with pytest for an arbitrary Python function calculating Fibonacci numbers.",
+    "should_trigger": false
+  },
+  {
+    "id": "near-miss-09",
+    "query": "Can you build a simple RAG demo using ChromaDB and OpenAI embeddings in a Jupyter notebook?",
+    "should_trigger": false
+  },
+  {
+    "id": "near-miss-10",
+    "query": "Configure a GitHub Actions workflow to run flake8 on every pull request.",
+    "should_trigger": false
+  }
+]

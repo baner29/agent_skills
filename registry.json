@@ -1,0 +1,30 @@
+{
+  "name": "agent_skills",
+  "description": "Production agent skills for AI coding agents building enterprise applications on Google Cloud Platform.",
+  "version": "1.0.0",
+  "repository": "https://github.com/baner29/agent_skills",
+  "author": {
+    "name": "Abhishek Banerjee",
+    "github": "baner29"
+  },
+  "skills": [
+    {
+      "name": "gcp-enterprise-agentic-rag",
+      "path": "gcp-enterprise-agentic-rag",
+      "description": "Scaffold, configure, validate, and deploy enterprise multi-agent systems on Vertex AI Agent Runtime with persistent memory banks, Cloud DLP privacy redaction, BigQuery ML summarization, and Vertex AI Search.",
+      "category": "cloud-infrastructure",
+      "tags": [
+        "gcp",
+        "vertex-ai",
+        "adk",
+        "rag",
+        "cloud-dlp",
+        "bigquery",
+        "agent-engine"
+      ],
+      "install": {
+        "npx": "npx skills add baner29/agent_skills --skill gcp-enterprise-agentic-rag"
+      }
+    }
+  ]
+}

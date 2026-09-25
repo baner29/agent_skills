@@ -24,7 +24,7 @@ The generated `README.md` must be tailored to the specific application created d
   ```bash
   GOOGLE_CLOUD_PROJECT=<project_id>
   GOOGLE_CLOUD_REGION=<region>
-  GOOGLE_CLOUD_MODEL=gemini-3.8-flash
+  GOOGLE_CLOUD_MODEL=gemini-2.5-flash
   STORAGE_BUCKET=<staging_bucket>
   AGENT_ENGINE_ID=<deployed_agent_engine_id>
   SERVICE_NAME=<service_name>
@@ -36,7 +36,7 @@ The generated `README.md` must be tailored to the specific application created d
 - Creating or updating the Agent Engine instance:
   ```bash
   # Deploy or update deployment on Vertex AI Agent Runtime
-  python deploy_agent_engine.py --mode=auto
+  python deploy_agent_engine.py --mode=update --engine_id=<engine_id>
   ```
 
 ---
@@ -78,11 +78,17 @@ engine = agent_engines.get("<agent_engine_id>")
 session = engine.create_session(user_id="user_123")
 
 # Send a query and stream the response
-response_stream = session.query_stream(
-    query="Show me the database trends from last week"
+response_stream = engine.stream_query(
+    message="Show me the database trends from last week",
+    user_id="user_123",
+    session_id=session["id"]
 )
 
-for chunk in response_stream:
-    if chunk.text:
-        print(chunk.text, end="", flush=True)
+for event in response_stream:
+    if isinstance(event, dict) and "content" in event:
+        parts = event["content"].get("parts", [])
+        for part in parts:
+            if "text" in part:
+                print(part["text"], end="", flush=True)
+print()
 ```

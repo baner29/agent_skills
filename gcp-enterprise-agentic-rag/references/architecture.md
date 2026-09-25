@@ -38,6 +38,8 @@ google-cloud-discoveryengine>=0.11.0
 opentelemetry-api>=1.20.0
 python-dotenv>=1.0.0
 pydantic>=2.0.0
+requests>=2.28.0
+cloudpickle>=3.0.0
 ```
 
 ## 3. State & Memory Service Builders (`root_agent/agent.py`)
@@ -52,7 +54,7 @@ def session_service_builder():
     """Builds per-turn GCS-backed session service for Agent Engine."""
     return VertexAiSessionService(
         project=os.environ.get("GOOGLE_CLOUD_PROJECT"),
-        location=os.environ.get("GOOGLE_CLOUD_REGION", "europe-west1"),
+        location=os.environ.get("GOOGLE_CLOUD_REGION", "us-central1"),
         agent_engine_id=os.environ.get("AGENT_ENGINE_ID"),
     )
 
@@ -60,7 +62,7 @@ def memory_service_builder():
     """Builds persistent cross-session memory bank service."""
     return VertexAiMemoryBankService(
         project=os.environ.get("GOOGLE_CLOUD_PROJECT"),
-        location=os.environ.get("GOOGLE_CLOUD_REGION", "europe-west1"),
+        location=os.environ.get("GOOGLE_CLOUD_REGION", "us-central1"),
         agent_engine_id=os.environ.get("AGENT_ENGINE_ID"),
     )
 
@@ -85,7 +87,7 @@ from google.adk.tools import FunctionTool
 
 root_agent = Agent(
     name="root_agent",
-    model=os.environ.get("GOOGLE_CLOUD_MODEL", "gemini-3.8-flash"),
+    model=os.environ.get("GOOGLE_CLOUD_MODEL", "gemini-2.5-flash"),
     instruction="""You are the root orchestrator. Triage user requests and delegate to specialized sub-agents. 
 Do not execute heavy queries or code searches directly; delegate to the domain expert. 
 Synthesize clear, direct answers for the user.""",

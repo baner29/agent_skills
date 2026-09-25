@@ -1,11 +1,13 @@
 ---
 name: gcp-enterprise-agentic-rag
 description: >-
-  Scaffolds, provisions, and deploys an enterprise serverless multi-agent RAG system
-  on Google Cloud Platform using Google ADK, Vertex AI Agent Runtime (Agent Engine),
-  Vertex AI Session & Memory Bank Services, Cloud DLP, Pub/Sub, BigQuery ML remote models,
-  and Vertex AI Search. Use when building or deploying enterprise multi-agent systems
-  on GCP, adding privacy-preserving RAG, or setting up managed agent memory.
+  Use this skill to scaffold, configure, test, and deploy production-grade multi-agent
+  systems on Google Cloud Platform. Use when the user asks to build or deploy an agent
+  architecture using Google ADK and Vertex AI Agent Runtime (Agent Engine), integrate
+  managed session state (VertexAiSessionService) or persistent memory (VertexAiMemoryBankService),
+  implement privacy-preserving RAG with Cloud DLP redaction, or build scheduled analytics
+  and search pipelines using BigQuery ML and Vertex AI Search—even if they do not explicitly
+  name every GCP service.
 license: Apache-2.0
 compatibility: >-
   Requires Google Cloud SDK (gcloud CLI), Python 3.10+, BigQuery, Vertex AI, and GCP API access.
@@ -62,7 +64,7 @@ Ask the user questions to collect application specifications. See [references/di
 Key defaults:
 
 - Root Orchestrator: **`root_agent`** (fixed default).
-- Default LLM: **`gemini-3.8-flash`**.
+- Default LLM: **`gemini-2.5-flash`** (verify availability in target region via pre-flight test).
 
 ---
 
@@ -109,13 +111,17 @@ If validation fails, review the output, fix errors in the code, and re-run. Proc
 
 1. **Pub/Sub & BigQuery Table Creation**: Create topic `agent-session-transcripts` and dataset tables.
 2. **Deploy Cloud DLP Cloud Function**: Deploy Gen 2 function `process-transcript-stream` with Cloud DLP redaction.
-3. **Automated BigQuery ML Provisioning**:
+3. **Automated BigQuery ML & Scheduled Insights ETL**:
    ```bash
    bash scripts/setup_bq_ml.sh "<gcp_project_id>" "<gcp_region>" "<bq_dataset_id>"
    ```
-4. **Vertex AI Search**: Link BigQuery insights table to Discovery Engine.
+4. **Vertex AI Search Data Store & App Setup**:
+   ```bash
+   python scripts/setup_vertex_search.py --project="<gcp_project_id>" --dataset="<bq_dataset_id>"
+   ```
+   *(Or follow the manual Console creation steps detailed in [references/rag_pipeline.md](references/rag_pipeline.md)).*
 
-For step-by-step SQL queries and Cloud DLP configurations, load [references/rag_pipeline.md](references/rag_pipeline.md).
+For step-by-step SQL queries, scheduled queries, and Cloud DLP configurations, load [references/rag_pipeline.md](references/rag_pipeline.md).
 
 ---
 

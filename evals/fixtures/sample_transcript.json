@@ -1,0 +1,20 @@
+{
+  "session_id": "sess-998877",
+  "user_id": "user-4455",
+  "timestamp": "2026-09-24T18:30:00Z",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Hi, my name is Jane Doe and my SSN is 000-12-3456. My email is jane.doe@example.com."
+    },
+    {
+      "role": "assistant",
+      "content": "Hello Jane, I can help you with your account inquiry."
+    }
+  ],
+  "agent_metadata": {
+    "root_agent": "root_orchestrator",
+    "delegated_to": "billing_agent",
+    "model": "gemini-2.5-flash"
+  }
+}

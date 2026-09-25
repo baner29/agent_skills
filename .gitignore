@@ -216,3 +216,12 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# MAC
+.DS_Store
+
+# Python Cache
+*.pyc
+
+# Evals runner workspaces
+evals/workspace/

@@ -29,3 +29,24 @@ await callback_context.add_events_to_memory(
 ## 5. OpenTelemetry GenAI Stability Opt-In
 - **Problem**: Detailed Gemini spans, tool invocations, and token counts do not appear in Google Cloud Trace.
 - **Solution**: Pass `OTEL_SEMCONV_STABILITY_OPT_IN="gen_ai_latest_experimental"` and `OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT="EVENT_ONLY"` into the Agent Engine environment variables.
+
+## 6. Vertex AI Reasoning Engine Empty Environment Variables
+- **Problem**: Deploying an engine with empty string environment variables fails with `Field: reasoning_engine.spec.deployment_spec.env[i].value; Message: Required field is not set.`
+- **Solution**: Strip empty strings from the `env_vars` dictionary (`{k: v for k, v in env_vars.items() if v}`) before calling `create` or `update`.
+
+## 7. BigQuery Connection Service Account IAM Latency
+- **Problem**: Attempting to execute `CREATE MODEL ... REMOTE WITH CONNECTION` immediately after granting `roles/aiplatform.user` fails with authorization errors.
+- **Solution**: GCP IAM cache synchronization requires a 15-20 second propagation window. Add a wait period after binding IAM roles.
+
+## 8. `AdkApp.stream_query` Parameter Contract
+- **Problem**: Remote calls to `stream_query` fail with `TypeError: AdkApp.stream_query() missing 2 required keyword-only arguments: 'message' and 'user_id'`.
+- **Solution**: Ensure client invocations pass `message`, `user_id`, and `session_id` as keyword arguments.
+
+## 9. Cloud Functions Gen 2 Cloud Build Permissions
+- **Problem**: Deploying Gen 2 Cloud Functions with Pub/Sub triggers prompts for missing Eventarc APIs and Cloud Build builder permissions.
+- **Solution**: Ensure `eventarc.googleapis.com` and `eventarcpublishing.googleapis.com` are enabled, and `roles/cloudbuild.builds.builder` is assigned to `${PROJECT_NUMBER}-compute@developer.gserviceaccount.com`.
+
+## 10. `cloudpickle` Serialization Dependency
+- **Problem**: Packaging `AdkApp` into `agent_engine.pkl` fails with `No package metadata was found for cloudpickle`.
+- **Solution**: Always include `cloudpickle>=3.0.0` in `requirements.txt`.
+

@@ -31,7 +31,7 @@ bq query --use_legacy_sql=false --project_id="${PROJECT_ID}" --location="${REGIO
 
 # 2. Retrieve Connection Service Account
 echo "Step 2: Retrieving connection service account..."
-CONNECTION_SA=$(bq show --connection --project_id="${PROJECT_ID}" --location="${REGION}" vertex_llm_conn --format=json | grep -o '"serviceAccountId": "[^"]*' | cut -d'"' -f4)
+CONNECTION_SA=$(bq --format=json show --connection --project_id="${PROJECT_ID}" --location="${REGION}" vertex_llm_conn | python3 -c "import json, sys; print(json.load(sys.stdin)['cloudResource']['serviceAccountId'])")
 
 echo "Found Connection Service Account: ${CONNECTION_SA}"
 echo "Granting 'roles/aiplatform.user' to connection service account..."
@@ -40,6 +40,8 @@ gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
   --role="roles/aiplatform.user" > /dev/null
 
 echo "✅ Granted Vertex AI User role to BigQuery connection SA."
+echo "Waiting 20 seconds for IAM policy propagation..."
+sleep 20
 
 # 3. Create BigQuery Remote Model Wrapper
 echo "Step 3: Creating Remote Gemini Model..."
@@ -57,6 +59,48 @@ SELECT session_id, timestamp, CAST(NULL AS STRING) AS global_insight
 FROM \`${DATASET_ID}.sanitized_transcripts\`
 LIMIT 0;"
 
+# 5. Create Daily Insights Scheduled Query
+echo "Step 5: Setting up Daily Insights Scheduled Query..."
+INSIGHTS_QUERY="INSERT INTO \`${PROJECT_ID}.${DATASET_ID}.extracted_insights\`
+  (session_id, timestamp, global_insight)
+SELECT
+  session_id,
+  timestamp,
+  ML.GENERATE_TEXT(
+    MODEL \`${PROJECT_ID}.${DATASET_ID}.gemini_pro_remote\`,
+    (
+      SELECT
+        CONCAT(
+          'Instructions: Analyze the conversation transcript provided below in JSON format.\n',
+          'Specifically look for user feedback keywords like \"correct\", \"wrong\", or \"remember\".\n',
+          'If you find these words or implied system corrections, extract the valuable feedback and summarize them as explicit, general system rules.\n',
+          'Do not refer to individual user actions, session specifics, or mention PII.\n',
+          'CRITICAL: If no user keywords or system rules can be extracted from the transcript, respond with exactly the word NO_RULE_DETECTED and nothing else than:\n',
+          'Transcript JSON:\n',
+          anonymized_transcript
+        ) AS prompt
+      FROM
+        \`${PROJECT_ID}.${DATASET_ID}.sanitized_transcripts\`
+      WHERE
+        timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
+    ),
+    STRUCT(TRUE AS flatten_json_output)
+  )
+FROM
+  \`${PROJECT_ID}.${DATASET_ID}.sanitized_transcripts\`
+WHERE
+  timestamp >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
+  AND ML.generate_text_llm_result IS NOT NULL
+  AND ML.generate_text_llm_result != 'NO_RULE_DETECTED';"
+
+bq mk --transfer_config \
+  --project_id="${PROJECT_ID}" \
+  --data_source=scheduled_query \
+  --display_name="Daily Insights Extraction" \
+  --target_dataset="${DATASET_ID}" \
+  --params="{\"query\":\"${INSIGHTS_QUERY}\"}" \
+  --schedule="every 24 hours" 2>/dev/null || echo "⚠️ Scheduled query already exists or requires BigQuery Data Transfer Service API."
+
 echo "=================================================="
-echo "✅ BigQuery Remote LLM connection and tables ready!"
+echo "✅ BigQuery Remote LLM connection, tables, and scheduled ETL ready!"
 echo "=================================================="
