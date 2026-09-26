@@ -48,13 +48,13 @@ Copy the target skill directory directly into your agent's skills configuration 
 | :--- | :--- |
 | **Antigravity CLI** | `.agents/skills/<skill-name>` |
 | **Gemini CLI** |`~/.gemini/config/skills/<skill-name>` |
-| **Claude Code** |`./claude/skills/<skill-name>` |
+| **Claude Code** |`~/.claude/skills/<skill-name>` |
 | **Cursor** | `.agents/skills/<skill-name>` |
 | **Github Copilot/ VS Code** |`~/.copilot/skills/<skill-name>` |
 | **Codex** |`~/.cursor/skills/<skill-name>` |
 | **OpenClaw** |`~/.openclaw/skills/<skill-name>` |
 
-To make the skills globally available for all your coding agents, put the skill in `~/.agents/skills/` and execute `ln -s ~/.agents/skills/<skill-name> ~/.gemini/config/skills/<skill-name>` (MAC) and `mklink /D "%USERPROFILE%\.gemini\config\skills\<skill-name>" "%USERPROFILE%\.agents\skills\<skill-name>"` (Windows) for each agent.
+To make the skills globally available for all your coding agents, put the skill in `~/.agents/skills/` and execute `ln -s ~/.agents/skills/<skill-name> <skills dir><skill-name>` (MAC) and `mklink /D "%USERPROFILE%\<skills dir>\<skill-name>" "%USERPROFILE%\.agents\skills\<skill-name>"` (Windows) for each agent.
 
 ---
 
