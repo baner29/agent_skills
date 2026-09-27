@@ -297,8 +297,7 @@ def validate_storage_location(filepath: Path, result: ValidationResult, allow_an
     if "documentation" not in norm_parts and "evals" not in norm_parts:
         result.warnings.append(
             f"File '{filepath.name}' is saved in '{filepath.parent}'. "
-            f"Guideline: Store documentation inside a 'documentation/' folder in the active path "
-            f"(e.g., documentation/architecture/, documentation/adr/, documentation/runbooks/), "
+            f"Guideline: Store documentation inside a 'documentation/' folder in the active path,"
             f"or as suggested by the user."
         )
 

@@ -78,7 +78,7 @@ When documenting complex enterprise systems, select the appropriate subset of vi
 
 ## 5. Docs-as-Code Best Practices
 
-1. **Colocate Docs in a Dedicated `documentation/` Directory**: Store all project documentation in a top-level `documentation/` directory in the active workspace path (e.g., `documentation/architecture/`, `documentation/adr/`, `documentation/runbooks/`), or in the custom path requested by the user. Never scatter loose documentation files across the repository root.
+1. **Colocate Docs in a Dedicated `documentation/` Directory**: Store all project documentation in a top-level `documentation/` directory in the active workspace path, or in the custom path requested by the user. Never scatter loose documentation files across the repository root.
 2. **Diagrams as Code Only**: Use Mermaid (` ```mermaid `) or text-based diagrams. **Avoid static PNG/JPEG screenshots of whiteboards or drawing tools**. If a service name changes, text diagrams can be updated with a simple search-and-replace, whereas static images rot immediately.
 3. **Single Source of Truth**: Never duplicate descriptions across multiple documents. If a service is defined in the architecture specification, reference that document from the ADR rather than re-explaining the service.
 4. **Enforce Maintainability**: *If you cannot maintain a diagram or view over time, do not create it.* Stale documentation is worse than no documentation because it introduces false assumptions into engineering decisions.

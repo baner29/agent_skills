@@ -57,12 +57,9 @@ Guard against the statistical hallmarks of LLM-generated prose ([Wikipedia:Signs
 
 ### Rule D: Dedicated Storage Directory (`documentation/`)
 **Always store documentation inside a `documentation/` folder in the active workspace path, or as explicitly suggested/requested by the user.**
-- ❌ **NEVER dump documentation files in the project root directory** (e.g., do not save `./ARCHITECTURE.md`, `./RUNBOOK.md`, or `./ADR-001.md` directly in the project root).
+- ❌ **NEVER dump documentation files in the project root directory**
 - ✅ **Standard Subdirectory Structure**:
-  - `documentation/architecture/` for system architecture specifications and component designs.
-  - `documentation/adr/` for Architecture Decision Records.
-  - `documentation/runbooks/` for operational runbooks, failover manuals, and deployment playbooks.
-  - `documentation/api/` for service contracts, schemas, and endpoint specifications.
+  - `documentation/`
 - ✅ **User Preference Priority**: If the user explicitly requests an alternative directory or naming convention (e.g., `docs/`, `wiki/`, or a custom path), follow the user's specification. If not specified, default strictly to `documentation/`. Ensure the directory is created if it does not exist.
 
 ---
@@ -94,7 +91,7 @@ flowchart TD
 Follow this six-step execution pipeline for every document:
 
 ### Step 1: Establish Storage Location & Audience
-1. **Target Folder**: Determine the output file path. Store the document inside a `documentation/` folder in the active path (e.g. `documentation/architecture/`, `documentation/adr/`, `documentation/runbooks/`, `documentation/api/`), or in the custom path suggested by the user. Ensure the directory is created if it does not already exist.
+1. **Target Folder**: Determine the output file path. Store the document inside a `documentation/` folder in the active path (e.g. `documentation/`), or in the custom path suggested by the user. Ensure the directory is created if it does not already exist.
 2. **Audience & Angles**: Determine who will read the document. Apply the 3-Angle View Framework from [references/best_practices_audience.md](references/best_practices_audience.md):
    - **Conceptual View** (PM, UX, Leadership): Focus on business goals, user personas, and capabilities.
    - **Component View** (Frontend, Integrators, IT): Focus on APIs, boundaries, and sync vs. async flows.
@@ -198,7 +195,7 @@ When documenting an individual microservice, API, or integration boundary:
 
 Before finalizing any technical documentation, verify every item on this checklist:
 
-- [ ] **Document Storage Location (`documentation/`)**: The document is stored within the `documentation/` folder in the active path (e.g. `documentation/architecture/`, `documentation/adr/`, `documentation/runbooks/`), or in the custom path explicitly requested by the user. It is NEVER placed directly in the repository root.
+- [ ] **Document Storage Location (`documentation/`)**: The document is stored within the `documentation/` folder in the active path, or in the custom path explicitly requested by the user. It is NEVER placed directly in the repository root.
 - [ ] **Pure Subject-Matter Focus (Zero Methodology Meta-Text)**:
   - Check that the document contains **ZERO** sentences describing how it was generated, what repository files were analyzed, or where data came from.
   - Check that there are **NO** sentences like:
