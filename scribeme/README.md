@@ -111,3 +111,5 @@ Read the guide that matches the task:
 ## License
 
 See the repository’s [Apache License 2.0](../LICENSE).
+
+The migration case also lists operational safety assertions for manual or live-agent review. The structural runner does not evaluate those assertions or validate a real migration. Its runbook is a rehearsal template with environment-specific prerequisites, a planned write pause, and separate recovery paths before and after destination writes.

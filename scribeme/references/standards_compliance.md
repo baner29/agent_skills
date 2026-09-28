@@ -68,8 +68,8 @@ Every hazard notice must contain:
 
 ```markdown
 > [!WARNING]
-> **Data Loss Risk**: Executing `DROP TABLE staging_orders` without taking a manual snapshot will permanently delete uncommitted transactions from the last 2 hours.
-> **Required Action**: Execute `pg_dump -t staging_orders dbname > backup.sql` before running this migration script.
+> **Data Loss Risk**: Dropping a table removes its stored data and can break dependent application operations.
+> **Required Action**: Confirm the exact target and dependencies, stop conflicting writes, and verify a restorable backup with an approved retention period before the destructive change. A backup command succeeding alone does not prove recovery is possible.
 ```
 
 ---

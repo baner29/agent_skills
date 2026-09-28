@@ -173,6 +173,11 @@ When documenting an architectural choice, use the clean format from [references/
 
 ### Mode 3: Operational Runbook & Guide
 When authoring runbooks, setup instructions, or user guides (see [references/standards_compliance.md](references/standards_compliance.md)):
+
+Operational correctness takes precedence over prose polish. Preserve safety prerequisites, uncertainty, and technical source links even when removing methodology text. Verify provider/version-specific operations against current authoritative documentation. If environment details are missing, label the result as a template and identify the required controls; do not invent production endpoints, commands, or successful output.
+
+For migrations and failover, specify actual service interruption, writer fencing, transaction draining, fresh replication measurements with units and scope, and data-integrity gates before promotion. Define abort conditions and distinguish rollback before and after the new destination accepts writes. Never prescribe simple endpoint reversal after data diverges. A formatting-validator pass does not establish operational safety.
+
 1. **Audience & Purpose**: Explicitly state required skill level and intended outcome.
 2. **Prerequisites**: Clear checklist of permissions, CLI tools, and environment variables.
 3. **Safety Notices**: Prominently display hazard alerts before risky operations.
