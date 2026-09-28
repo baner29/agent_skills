@@ -2,6 +2,9 @@
 
 Write technical documentation that explains how a system works, why a team chose a design, or how to complete an operational task. Scribeme gives coding agents document blueprints, Mermaid diagram guidance, and a Python linter for structure and wording.
 
+<img width="1376" height="768" alt="ScribeMe.jpg" src="https://github.com/user-attachments/assets/b9d971fb-6609-4ecb-995b-da711b52ab65" />
+
+
 ## Choose a document type
 
 Use Scribeme to create or improve these documents:
