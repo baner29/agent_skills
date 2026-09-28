@@ -1,0 +1,86 @@
+{
+  "skill_name": "scribeme",
+  "version": "1.1.0",
+  "eval_cases": [
+    {
+      "id": "eval-1-full-architecture-spec",
+      "title": "Distributed Checkout System Architecture Specification",
+      "prompt": "Create a comprehensive system architecture document for a distributed high-throughput e-commerce checkout platform that processes orders and connects to Stripe and SendGrid. Include system context diagrams, container topologies, stakeholder needs, key runtime sequence flows, and map technical requirements to user outcomes. Do NOT quote framework names or internal standards in the text.",
+      "target_mode": "Mode 1: System Architecture Specification",
+      "required_sections": [
+        "Introduction and Goals",
+        "Architecture Constraints",
+        "Context and Scope",
+        "Solution Strategy",
+        "Building Block View",
+        "Runtime View",
+        "Deployment View",
+        "Crosscutting Concepts",
+        "Architecture Decisions",
+        "Quality Requirements",
+        "Risks and Technical Debt",
+        "Glossary"
+      ],
+      "assertions": [
+        "Contains System Context Diagram in valid Mermaid syntax",
+        "Contains Container Topology Diagram in valid Mermaid syntax",
+        "Contains Mermaid Sequence Diagram with numbered steps",
+        "Contains Outcome Translation Table linking technical requirements to user impact",
+        "Invisible scaffolding: zero quoting of internal standards or frameworks (arc42, C4, ISO, IEC)",
+        "Zero methodology meta-text or prompt echoing (no claims of reflecting source code, no instruction echoes)",
+        "Zero Wikipedia AI writing markers (no trailing -ing commentary, puffery, or rule-of-threes)",
+        "Stores documentation in documentation/ directory (or user-specified folder)",
+        "Passes doc_validator.py without errors"
+      ]
+    },
+    {
+      "id": "eval-2-adr-event-streaming",
+      "title": "Architecture Decision Record for Event Streaming Platform",
+      "prompt": "Write an Architecture Decision Record (ADR) deciding between Apache Kafka, RabbitMQ, and AWS SQS for asynchronous event streaming across our order processing microservices. Include trade-offs, decision drivers, and decision reasoning. Do NOT label sections with 'Executive Y-Statement' or cite MADR.",
+      "target_mode": "Mode 2: Architecture Decision Record",
+      "required_sections": [
+        "Context and Problem Statement",
+        "Decision Drivers",
+        "Considered Options",
+        "Decision Outcome",
+        "Trade-off Analysis Matrix",
+        "Consequences & Mitigation"
+      ],
+      "assertions": [
+        "Declares valid lifecycle status (e.g. Accepted)",
+        "Includes standard 5-clause decision reasoning: 'In the context of..., facing..., we decided for..., to achieve..., accepting...'",
+        "Contains comparative Trade-off Analysis Matrix evaluating all options against criteria",
+        "Provides actionable operational mitigations for negative consequences",
+        "Invisible scaffolding: zero quoting of MADR or Y-statement labels",
+        "Zero methodology meta-text or prompt echoing (no claims of reflecting source code, no instruction echoes)",
+        "Zero Wikipedia AI writing markers (no trailing -ing commentary, puffery, or rule-of-threes)",
+        "Stores documentation in documentation/ directory (or user-specified folder)",
+        "Passes doc_validator.py without errors"
+      ]
+    },
+    {
+      "id": "eval-3-production-database-migration-runbook",
+      "title": "Production Database Migration and Failover Runbook",
+      "prompt": "Write an operational technical runbook and user manual for executing a zero-downtime PostgreSQL database migration from version 14 to version 16 on Google Cloud SQL, including hazard warnings for data loss, rollbacks, prerequisites, and verification steps. Do NOT cite standard names in the text.",
+      "target_mode": "Mode 3: Operational Runbook & Guide",
+      "required_sections": [
+        "Audience & Purpose",
+        "Prerequisites",
+        "Safety Notices",
+        "Step-by-Step Procedure",
+        "Verification & Health Check",
+        "Rollback & Troubleshooting"
+      ],
+      "assertions": [
+        "Structures procedure with Prerequisites, Step-by-Step, and Verification",
+        "Applies safety alert hierarchy with explicit hazard, consequence, and required action",
+        "Contains imperative, numbered step commands with expected outputs",
+        "Invisible scaffolding: zero quoting of IEC/IEEE 82079 or ISO 20607 standards",
+        "Zero methodology meta-text or prompt echoing (no claims of reflecting source code, no instruction echoes)",
+        "Zero Wikipedia AI writing markers (no trailing -ing commentary, puffery, or rule-of-threes)",
+        "Stores documentation in documentation/ directory (or user-specified folder)",
+        "Passes doc_validator.py without errors"
+      ]
+    }
+  ]
+}

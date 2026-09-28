@@ -1,6 +1,6 @@
 # 🧠 Agent Skills 
 
-A curated collection of production agent skills for AI coding agents (Claude Code, Cursor, Codex, OpenClaw, Antigravity, GitHub Copilot, and any other agent compatible with [`skills-md`](https://agentskills.io/home)). Each skill provides specialized architecture blueprints, automated self-validation scripts, templates, and pre-deployment checklists.
+A curated collection of production agent skills for AI coding agents (Claude Code, Cursor, Codex, OpenClaw, Antigravity, GitHub Copilot, and any other agent compatible with [`skills-md`](https://agentskills.io/home)). Skills package task-specific instructions, reference guides, and validation scripts for cloud development and technical documentation.
 
 ---
 
@@ -9,6 +9,7 @@ A curated collection of production agent skills for AI coding agents (Claude Cod
 | Skill | Description | Installation |
 | :--- | :--- | :--- |
 | 🤖 [`gcp-enterprise-agentic-rag`](./gcp-enterprise-agentic-rag/) | Scaffold, configure, self-validate, and deploy serverless multi-agent systems on Google Cloud Platform with ADK, Vertex AI Agent Runtime, persistent memory banks, Cloud DLP PII sanitization, BigQuery ML summarization, and Vertex AI Search. | `npx skills add baner29/agent_skills --skill gcp-enterprise-agentic-rag` |
+| ✍️ [`scribeme`](./scribeme/README.md) | Write architecture documents, decision records, operational runbooks, and service briefs with Mermaid diagrams and a document linter. | `npx skills add baner29/agent_skills --skill scribeme` |
 
 There are many agents skills being developed and released at a rapid scale by community contributors. Our aim is to ensure the skills we release solve production grade problems. Stay tuned for more exicting releases soon.
 
@@ -68,7 +69,7 @@ Google Cloud with persistent memory and sensitive-data redaction.
 Start by gathering requirements and checking prerequisites.
 ```
 
-The skill’s workflow starts with requirements discovery, followed by prerequisite checks, scaffolding, validation, and deployment. The example requests the planning stages; the [skill instructions](./<skill-name>/SKILL.md) describe the complete workflow.
+The skill’s workflow starts with requirements discovery, followed by prerequisite checks, scaffolding, validation, and deployment. The example requests the planning stages; the [Google Cloud skill instructions](./gcp-enterprise-agentic-rag/SKILL.md) describe the complete workflow.
 
 If your agent doesn’t discover the skill, check that the installer targeted the correct agent and project or user scope. For manual installations, confirm that `SKILL.md` sits directly inside the skill directory and that supporting files remain alongside it.
 
@@ -84,6 +85,12 @@ agent_skills/
 │   ├── references/               # Service details and known issues
 │   ├── scripts/                  # Setup and validation scripts
 │   └── assets/                   # Code templates
+├── scribeme/
+│   ├── SKILL.md                  # Documentation workflows
+│   ├── README.md                 # Installation and usage guide
+│   ├── references/               # Document and diagram guides
+│   ├── scripts/                  # Document validator
+│   └── evals/                    # Sample documents and evaluation runner
 └── evals/
     ├── triggers/                 # Queries that should or shouldn’t match
     ├── quality/                  # Test prompts and assertions
@@ -97,6 +104,8 @@ agent_skills/
 ## Evaluation & Benchmarking
 
 The repository includes an automated evaluation harness adhering to the [Agent Skills Evaluation Specification](https://agentskills.io/skill-creation/evaluating-skills).
+
+The root evaluation runner targets the Google Cloud skill. For Scribeme, use its [bundled evaluation runner](./scribeme/README.md#run-the-bundled-evaluations).
 
 ### Running Evaluations
 
