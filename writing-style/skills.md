@@ -1,0 +1,5 @@
+- step 1 is to ask user to provide writing style input
+- provide questions for user to generate their writing style
+- questions, user has to answer in same tone, vocabulary, sentence structure, rhetorical devices, and pacing as they would normally
+    - how is your day going so far? - answer in 50 words or less
+    - describe a time when you had to 
