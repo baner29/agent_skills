@@ -43,7 +43,6 @@ Every procedural section MUST follow this four-part structure:
 
 **Verification**:
 Confirm that [expected end-state is reached, e.g., service responds at `https://localhost:8080/health` with HTTP 200].
-```
 
 ---
 
