@@ -5,6 +5,8 @@
 > "Good prose is like a windowpane."
 > — George Orwell, *Why I Write* (1946)
 
+**Try it live:** [orwell.banerworks.com](https://orwell.banerworks.com)
+
 ## The idea
 
 AI writes in a fog. Ask a machine for a paragraph and you get words like "leverage", "delve", and "seamless", sentences that begin with "In today's fast-paced world", and claims dressed up to sound bigger than they are. People do not talk this way. Readers feel the fog at once, even when they cannot name it, and they trust the text less.
