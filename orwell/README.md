@@ -9,11 +9,11 @@
 
 ## The idea
 
-AI writes in a fog. Ask a machine for a paragraph and you get words like "leverage", "delve", and "seamless", sentences that begin with "In today's fast-paced world", and claims dressed up to sound bigger than they are. People do not talk this way. Readers feel the fog at once, even when they cannot name it, and they trust the text less.
+AI writes in a fog. This skill clears it: give it a paragraph an AI wrote for you, and it hands the paragraph back in plain English, with every fact and claim exactly where it was. Ask a machine for a paragraph and you get words like "leverage", "delve", and "seamless", sentences that begin with "In today's fast-paced world", and claims dressed up to sound bigger than they are. People do not talk this way. Readers feel the fog at once, even when they cannot name it, and they trust the text less.
 
-George Orwell spent his career fighting this kind of language. His rule was simple: never use a long word where a short one will do, and never use a foreign or technical phrase when a plain English one says the same thing. Good prose, he wrote, is like a windowpane. You look through it and see the meaning. You do not stop to admire the glass.
+George Orwell spent his career fighting this kind of language. His rule was simple: never use a long word where a short one will do, and never use a foreign or technical phrase when a plain English one says the same thing. Good prose, he wrote, is like a windowpane. You look through it and see the meaning. You do not stop to admire the glass. The rule still does its work on today's drafts. A sentence like "Our team will leverage cutting-edge solutions to streamline your workflow and unlock valuable insights" comes back as "Our team will use modern tools to simplify your workflow and find valuable insights." The claim is the same. The fog is gone.
 
-Orwell is an agent skill built on that idea. You give it text that an AI produced. It takes out the machine words and the machine habits, fixes the grammar, and joins the sentences so they read in a natural order. Then it gives the text back. The facts stay where they were. The meaning stays the same. The writer's tone stays the same. Only the wording changes, and it changes toward short, plain, honest English that any reader can follow on the first pass.
+Orwell is an agent skill built on that idea. Its job is narrow, and it stays narrow: it changes wording, and nothing else. You give it text that an AI produced. It takes out the machine words and the machine habits, fixes the grammar, and joins the sentences so they read in a natural order. Then it gives the text back. The facts stay where they were. The meaning stays the same. The writer's tone stays the same. What changes is the wording, toward short, plain, honest English that any reader can follow on the first pass.
 
 ## What it does
 
