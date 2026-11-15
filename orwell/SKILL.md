@@ -1,6 +1,6 @@
 ---
 name: orwell
-description: The last pass over a finished draft. Turns AI-generated or AI-assisted text into natural, plain English with the smallest changes that clear the fault: removes AI jargon, dead phrases, and machine sentence habits while preserving facts, meaning, structure, register, and the writer's voice. Use when a user asks to humanize, naturalize, de-AI, clean up, or polish a draft, article, email, or essay as a final refinement, to scan a text for AI patterns without rewriting it, or to add words and patterns to the banned list. When the user also has a personal writing-style skill or guide, apply this skill first and let the personal style win on any conflict.
+description: The last pass over a finished draft. Turns AI-generated or AI-assisted text into natural, plain English with the smallest changes that clear the fault, removing AI jargon, dead phrases, and machine sentence habits while preserving facts, meaning, structure, register, and the writer's voice. Use when a user asks to humanize, naturalize, de-AI, clean up, or polish a draft, article, email, or essay as a final refinement, to scan a text for AI patterns without rewriting it, or to add words and patterns to the banned list. When the user also has a personal writing-style skill or guide, apply this skill first and let the personal style win on any conflict.
 ---
 
 # Orwell
