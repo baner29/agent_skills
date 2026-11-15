@@ -19,7 +19,7 @@ Orwell is an agent skill built on that idea. Its job is narrow, and it stays nar
 
 - It reads your text against a list of banned words and phrases, the ones machines reach for again and again, and swaps each one for a plain word.
 - It breaks the habits that give machine writing away: sentences built as "it is not X, it is Y", lists of three adjectives where one would do, verbs hidden inside phrases like "serves as", and clauses tacked on the end of a sentence to make it sound grand.
-- It tidies the language itself: one clear idea per paragraph, sentences in an order the reader can follow, exact verbs in place of vague ones, and a mix of short and long sentences so the text has a natural rhythm.
+- It tidies the language itself: one clear idea per paragraph, sentences in an order the reader can follow, exact verbs in place of vague ones, and grammar checked line by line. Your rhythm stays yours.
 - It rates nothing and judges nothing about your ideas. Weak reasoning stays weak. The skill cleans the glass. It does not change the view.
 
 ## What it never does
@@ -47,6 +47,7 @@ Ask your agent to clean up any draft an AI helped write:
 - "Make this email sound human. Keep every fact and keep the formal tone."
 - "Clean up this draft, and add 'synergize' to the banned list."
 - "Tidy this essay so the sentences flow and the grammar is sound, and change nothing it says."
+- "Tell me what makes this draft sound like AI. Change nothing yet."
 
 The agent hands back the cleaned text on its own, unless you ask for a list of what changed.
 
@@ -54,9 +55,11 @@ The agent hands back the cleaned text on its own, unless you ask for a list of w
 
 1. **The meaning is locked first.** Before a single word is touched, the agent sets aside everything that must not change: facts, numbers, dates, names, claims, quotes, code, and links. Only wording, sentence shape, and grammar are open to edit.
 2. **The machine words come out.** The agent reads the banned list in `references/banned-ai-words.md` and removes every match, along with the sentence patterns listed above. If your text credits a claim to "experts" or "studies" without naming one, the agent points at it and tells you. It will not invent a source to fill the gap.
-3. **The language is put in order.** Sentences are joined so each one follows from the last. Repeated nouns give way to short references. Vague verbs are swapped for exact ones. Sentence lengths are varied, and grammar and punctuation are checked line by line.
+3. **The language is put in order.** Sentences are joined so each one follows from the last. Repeated nouns give way to short references. Vague verbs are swapped for exact ones. Your own mix of sentence lengths is left alone, and grammar and punctuation are checked line by line.
 4. **The banned list keeps growing.** The list is yours to edit at any time. When you cross the same word out of draft after draft, the agent can suggest adding it. It adds the word only when you say yes, unless you have told it to learn from your edits on its own.
 5. **The result is checked against the source.** The agent reads the cleaned text side by side with yours, paragraph by paragraph. Every claim must still be there, nothing new may appear, and quotes and code must match letter for letter. If the rewrite picked up a fresh cliché on the way, it comes out before you see the text.
+
+That is the full pass, and it is the last step of a writing process, not the first: run it when the draft is finished and your own tools have done their work. The skill also works in a smaller way. Ask for a scan and it reports the machine patterns in a text without changing a word. The counting half of the check can run as a script (`scripts/scan.py`), so the agent spends its attention on judgment instead of counting.
 
 ## The banned list
 
@@ -72,6 +75,12 @@ Orwell works well next to a personal style guide, and the two do different jobs.
 
 | File | What it is |
 | --- | --- |
-| `SKILL.md` | The skill itself: when to use it, the five steps, and the traps to avoid |
+| `SKILL.md` | The core: the last-mile rule, Orwell's six rules and six questions, and the map to the files below |
+| `references/edit.md` | The full pass, step by step |
+| `references/scan.md` | How to report a text's machine patterns without rewriting it |
+| `references/learn.md` | How the banned list grows and stays clean |
+| `references/orwell-judgment.md` | When a rule should bend, in Orwell's own practice, with worked examples |
+| `references/orwell-research.md` | The scholarship behind the rules, kept as background |
 | `references/banned-ai-words.md` | The banned list, kept open for edits and additions |
+| `scripts/scan.py` | A script that applies the banned list and counts sentences, so the agent judges instead of counting |
 | `poster.png` | The title poster |
