@@ -75,4 +75,3 @@ Orwell works well next to a personal style guide, and the two do different jobs.
 | `SKILL.md` | The skill itself: when to use it, the five steps, and the traps to avoid |
 | `references/banned-ai-words.md` | The banned list, kept open for edits and additions |
 | `poster.png` | The title poster |
-| `app/` | A small web app that runs Orwell in the browser, with the jargon marked and the original rated out of 100 |

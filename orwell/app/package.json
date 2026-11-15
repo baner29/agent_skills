@@ -1,1 +1,0 @@
-{"dependencies":{"@google/genai":"^1.0.0","express":"^4.21.2"},"description":"Orwell — paste AI-generated text, get natural English back, with AI jargon highlighted and an Orwellian rating for the original.","name":"orwell-app","private":true,"scripts":{"dev":"node server.js","start":"node server.js"},"type":"module","version":"1.0.0"}
