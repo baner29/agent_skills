@@ -2,9 +2,10 @@
 """Mechanical scan for the Orwell skill.
 
 Applies references/banned-ai-words.md to a text file and reports hits,
-sentence statistics, and em dash count. It counts; it does not judge.
-Hits inside quotation marks may be examples held up for scorn, not
-faults. That call belongs to the reader.
+sentence statistics, burstiness (sentence-length spread, repeated
+openings, paragraph shape), and em dash count. It counts; it does not
+judge. Hits inside quotation marks may be examples held up for scorn,
+not faults. That call belongs to the reader.
 
 Usage: python3 scan.py <text-file> [--list <banned-list-file>]
 Default list: ../references/banned-ai-words.md relative to this script.
@@ -13,7 +14,9 @@ Standard library only.
 
 import argparse
 import re
+import statistics
 import sys
+from collections import Counter
 from pathlib import Path
 
 
@@ -137,6 +140,56 @@ def main() -> int:
               f"{sum(lengths) / len(lengths):.1f} words | {len(long_s)} over 30 words")
         for ln, L, s in long_s:
             print(f'  long: line {ln} ({L} words): "{s[:70]}..."')
+
+    print("\nBurstiness (sentence rhythm):")
+    if len(lengths) < 5:
+        print("  Too few sentences to judge rhythm.")
+    else:
+        mean = sum(lengths) / len(lengths)
+        sd = statistics.pstdev(lengths)
+        cv = sd / mean if mean else 0.0
+        short_n = sum(1 for L in lengths if L <= 6)
+        long_n = sum(1 for L in lengths if L >= 25)
+        if cv < 0.35:
+            verdict = "flat: the sentences hold one steady length"
+        elif cv <= 0.55:
+            verdict = "some variation in sentence length"
+        else:
+            verdict = "varied: short and long sentences alternate"
+        print(f"  Lengths: shortest {min(lengths)}, longest {max(lengths)}, "
+              f"spread (stdev) {sd:.1f} words")
+        print(f"  Short sentences (6 words or fewer): {short_n} | "
+              f"Long sentences (25 words or more): {long_n}")
+        print(f"  Verdict: {verdict}.")
+
+        openings = Counter()
+        for s in sentences:
+            toks = s.group(0).split()
+            if len(toks) >= 2:
+                openings[" ".join(toks[:2])] += 1
+        repeated = [(o, n) for o, n in openings.most_common() if n >= 3]
+        if repeated:
+            print("  Repeated openings (first two words, 3 or more times):")
+            for o, n in repeated:
+                print(f'    "{o}..." x{n}')
+        else:
+            print("  Repeated openings: none start 3 or more sentences.")
+
+        paras = [p for p in re.split(r"\n\s*\n", raw) if p.strip()]
+        para_counts = []
+        for p in paras:
+            n = len(re.findall(r"[^.!?]+[.!?]+", normalize(p)))
+            if n:
+                para_counts.append(n)
+        if len(para_counts) >= 3:
+            print(f"  Paragraphs: {len(para_counts)}, "
+                  f"sentences per paragraph: {para_counts}")
+            if len(set(para_counts)) == 1:
+                print(f"  Uniform shape: every paragraph has exactly "
+                      f"{para_counts[0]} sentences.")
+        elif para_counts:
+            print(f"  Paragraphs: {len(para_counts)}, "
+                  f"sentences per paragraph: {para_counts}")
     print(f"Em dashes: {raw.count(chr(0x2014))}")
     print("\nNote: hits inside quotation marks may be examples, not faults. "
           "Judgment belongs to the reader.")
