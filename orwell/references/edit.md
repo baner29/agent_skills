@@ -61,6 +61,24 @@ Every claim in the original survives: scaling, reduced hardware costs, resilienc
 
 **Output:** return the edited text only, unless the user asks for a change summary. List any flagged vague attributions briefly after the text.
 
+## Optional: the burstiness pass
+
+Off by default. Run it only when the user asks for it ("add burstiness", "vary the rhythm", or the option switched on where the skill is offered as an app). It suspends exactly two standing rules: preserve the draft's shape, and do not manufacture variety the draft does not have. Every other rule in this file still binds, and the Step 1 content invariant is untouched.
+
+What the pass may do:
+
+- Split one long sentence into two, or join two short ones, where the rhythm asks for it.
+- Vary sentence openings so three in a row never share the same grammatical shape.
+- Move a sentence break so paragraph lengths vary, from a single sentence to about six.
+
+What it still may not do:
+
+- Add a specific detail, example, or number the draft does not contain. Real burstiness comes from real detail. Invented detail is fabrication, not rhythm.
+- Reorder paragraphs, change the register, or touch protected spans.
+- Change what the text is. The pass varies how the sentences run, and nothing more.
+
+Run Steps 2 and 3 first, then this pass, then the Step 4 verification as usual. If the user asks for a change summary, state that the burstiness pass ran.
+
 ## Gotchas
 
 - **Over-editing into blandness.** Removing AI jargon does not mean stripping legitimate domain terms. *Semantic layer*, *gradient descent*, and *latency* stay.

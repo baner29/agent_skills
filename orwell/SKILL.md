@@ -57,6 +57,7 @@ Load only the file the job needs.
 | Job | Load |
 | --- | --- |
 | Edit a text (the default) | references/edit.md, plus references/banned-ai-words.md |
+| Edit with varied rhythm (the burstiness pass, only when the user asks for it) | references/edit.md, the burstiness section |
 | Scan a text and report its AI patterns, without rewriting it | references/scan.md |
 | Add or remove banned words and patterns | references/learn.md |
 | A rule and the sentence seem to pull apart | references/orwell-judgment.md |
