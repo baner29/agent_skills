@@ -1,6 +1,6 @@
 # Edit mode: the full pass
 
-The default job. Take a finished text and return the same text with the machine residue removed. The core rules in SKILL.md govern throughout: last mile, smallest change, nothing structural, the writer's voice wins ties.
+The default job. Take a finished text and return it simpler: same point, same needed facts, less weight. The core rules in SKILL.md govern throughout: read the context first, keep what the reader needs, cut what adds nothing in context, and rebuild sentences freely when a rebuild is clearer.
 
 ## Before you start
 
@@ -8,19 +8,73 @@ The default job. Take a finished text and return the same text with the machine 
 - Read references/banned-ai-words.md so the current list, including the user's own additions, is enforced.
 - If a sentence and a rule pull apart at any point, consult references/orwell-judgment.md before forcing the rule.
 
-## Step 1: Lock the content invariant
+## Step 1: Settle the context
 
-Separate substance from expression before touching a word.
+Write down, for yourself, before touching a word:
 
-- **Preserve completely:** facts, numbers, dates, named entities, technical claims, logical conclusions, hedges and qualifiers, and the writer's intended stance.
-- **Edit only:** word choice, sentence structure within the writer's own shape, transitions, grammar, and punctuation.
-- Never invent an example, add an external claim, or soften an explicit conclusion to sound balanced.
+- **Purpose:** what this text must do (inform, ask, decide, instruct, persuade, report, reply).
+- **Reader:** who reads it, what they already know, and what they must be able to do or understand after reading.
+- **Point per paragraph:** one line each. A paragraph with no point is a cut candidate. A paragraph with two points may need a split.
+
+If the user gave no context beyond the text, take the purpose and reader from the text itself. If both stay unclear, edit with care: cut filler, repetition, and machine habits only, and keep every detail that could matter.
+
+## Step 2: Lock what must stay
+
+Separate the load-bearing content from the weight around it.
+
+- **Keep completely:** the main point and stance, conclusions, facts, numbers, dates, and names the reader needs, conditions, limits, risks, causes, evidence, and hedges that change certainty.
 - **Protected spans pass through untouched:** direct quotations, code and code blocks, URLs and file paths, email addresses, citations, and data inside tables. A pass that rewrites a quote or a link has corrupted the content.
-- **Preserve the register.** Natural does not mean informal. Match the original's formality and audience.
-- **Preserve length and shape.** Keep the paragraph count and roughly the original length. This pass is not a summary and not an expansion.
+- **Preserve the register.** Simple does not mean informal. Match the original's formality and audience.
 - **Preserve the spelling convention** already in the text.
+- Never invent an example, add an external claim, or soften an explicit conclusion to sound balanced.
 
-## Step 2: Scrub the machine patterns
+Length and shape are no longer locked. The output may be shorter than the input, and usually should be. It may not be shorter because a needed fact was dropped to save words.
+
+## Step 3: Cut what adds nothing in context
+
+Work paragraph by paragraph. Apply the cut test to every clause, detail, and sentence: if this goes, does the reader lose anything they need to act, decide, judge, or understand the point?
+
+Cut, in this order:
+
+1. **Irrelevant details.** True facts that change nothing here: reasons, motives, background, and personal preferences the reader does not need and did not ask for.
+2. **Restatement.** Sentences or clauses that repeat the question, the previous sentence, or a point already made.
+3. **Unasked answers.** Clauses that explain something nobody in this context needs explained.
+4. **Delay.** Openers and scene-setting that postpone the point ("I am writing to inform you that...", "As mentioned in our previous discussion regarding...").
+5. **Duplicate proof.** A second example, statistic, or anecdote that proves the same point as the first, unless the list itself is the point.
+6. **Empty qualifiers.** "In my personal opinion", "it is important to note that", "due to the fact that" and their kin. Cut the frame, keep the claim.
+
+### Worked example: the counter test
+
+Context: a customer answering a food counter worker who asked what to add or remove.
+
+**Before:** "Yes, please remove the tomatoes from my burger, as I do not like tomatoes and I find that they tend to make the burger soggy for my taste."
+
+**After:** "Yes, no tomatoes, please."
+
+The request survives whole. The reason goes because the worker needs the instruction, not the reason, to act. In a different context the same reason stays: in a review, a recipe note, or a letter about an allergy, why the tomatoes come out is part of the point. Relevance is judged in context, never from the sentence alone. An allergy, a deadline, a cost limit, or any detail that changes what the reader should do is load-bearing and stays in every context.
+
+When a cut removes a full sentence or a named fact, and the user has asked for a change summary, list the cuts and the reason for each in one line. Otherwise return the text only.
+
+## Step 4: Remove needless complexity
+
+With the weight gone, simplify what is left. Sentence structure is open: rebuild any sentence that reads more clearly in a new shape.
+
+1. **Unstack clauses.** A sentence carrying three or more subordinate clauses gets split or rebuilt so each idea lands once, in order.
+2. **Put the actor and the action first.** "A decision was made by the team to postpone" becomes "The team postponed it", unless the passive is the honest form (see references/orwell-judgment.md).
+3. **Turn noun piles back into verbs.** "Make an assessment of" becomes "assess". "In the event that" becomes "if". "Has the ability to" becomes "can".
+4. **Cut word-level padding.** Apply Orwell's Rule 3 word by word after the clause-level cuts: if a word can go and the meaning stays, it goes.
+5. **One idea per sentence, in the order the reader needs it.** Known information first, new information next. Move a clause earlier or later inside the paragraph when the current order forces the reader to hold too much in mind.
+6. **Keep needed precision.** A condition, a number, or a technical term that carries the point is not complexity. It stays, in its exact form.
+
+### Worked example: complexity
+
+**Before:** "In today's fast-paced digital landscape, organizations must leverage cutting-edge cloud solutions to unlock seamless scalability. It is not just about reducing hardware costs; it is about fostering an innovative, resilient, and agile ecosystem, ultimately underscoring the pivotal role of modern infrastructure in the facilitation of organizational growth and the enhancement of operational efficiency."
+
+**After:** "Organizations now use modern cloud platforms to scale capacity as demand changes, without buying hardware up front. The gain is lower hardware costs, systems that hold up under load, and room to change as needs change."
+
+What went: the opener, the banned words, the negative parallelism, the trailing commentary, and the final clause, which restated the point in bigger words. What stayed: scaling, lower hardware costs, holding up under load, and adapting. Nothing was added.
+
+## Step 5: Scrub the machine patterns
 
 Remove every match from the banned list, then work through the sentence habits:
 
@@ -32,57 +86,47 @@ Remove every match from the banned list, then work through the sentence habits:
 6. **Spotlight frames.** Cut "the part that matters", "what really counts is...", and other stage directions that announce importance instead of stating the point.
 7. **False ranges.** Rewrite "whether you are X or Y" and "from X to Y" constructions that sweep without saying anything specific.
 8. **Em-dash overuse.** Replace em dashes with periods, commas, colons, or parentheses, so pauses read as choices rather than habit.
-9. **Flag, do not fix, vague attributions.** "Experts say" and "studies show" with no named source are machine tells, but inventing a source breaks the invariant. Leave the claim as written and note it for the user after the text.
+9. **Flag, do not fix, vague attributions.** "Experts say" and "studies show" with no named source are machine tells, but inventing a source breaks the content lock. Leave the claim as written and note it for the user after the text, or cut it if the claim itself adds nothing the reader needs.
 
-## Step 3: Refine what is left
+## Step 6: Verify before returning
 
-Work the three checks below only where a fault remains. The smallest-change rule governs this step: a sentence that already reads naturally is finished, however it is built.
-
-1. **Coherence and cohesion.** Each paragraph keeps one central idea. Sentences flow from known information to new. Replace mechanical noun repetition with natural reference ("this approach", "they") where the repetition is the machine's, not the writer's emphasis. Use connectors ("however", "consequently") only where the logical link is not already obvious.
-2. **Word choice.** Prefer the exact verb over a vague one with a modifier. Keep precise technical nouns intact: domain terminology is not jargon. Use natural collocations, the pairings native speakers make without thinking.
-3. **Grammar and rhythm.** Check agreement, tense consistency, parallel structure, and modifier placement. Keep the writer's own mix of sentence lengths. Do not manufacture variety the draft does not have, and do not flatten variety it does.
-
-### Worked example
-
-**Before:** "In today's fast-paced digital landscape, organizations must leverage cutting-edge cloud solutions to unlock seamless scalability. It is not just about reducing hardware costs; it is about fostering an innovative, resilient, and agile ecosystem — ultimately underscoring the pivotal role of modern infrastructure."
-
-**After:** "Organizations now use modern cloud platforms to scale capacity up or down as demand changes, without buying hardware up front. Lower hardware costs are only part of the gain; the systems also hold up under load and adapt as needs change. Modern infrastructure sits at the center of how organizations run."
-
-Every claim in the original survives: scaling, reduced hardware costs, resilience, adaptability, and the central role of infrastructure. Nothing was added. If a rewrite needs a fact the original does not contain, the rewrite is wrong.
-
-## Step 4: Verify before returning
-
-- Re-read the output against the source, paragraph by paragraph. Every number, name, date, and claim is still present and unchanged in meaning.
-- Confirm no new claim, example, or qualifier appeared, and none was dropped.
-- Scan once more against the banned list and the Step 2 patterns. A rewrite often introduces a fresh cliché while removing another.
+- Re-read the output against the source, paragraph by paragraph. Every load-bearing fact, number, name, date, condition, and conclusion is still present and unchanged in meaning.
+- List your cuts to yourself. Each one passes the cut test: the reader loses nothing they need. Any cut you cannot justify in one line goes back in.
+- Confirm no new claim, example, or qualifier appeared.
+- Scan once more against the banned list and the Step 5 patterns. A rewrite often introduces a fresh cliché while removing another.
 - Confirm protected spans are byte-identical to the source.
 - Confirm register and spelling convention match the original.
 - Ask Orwell's sixth question of the whole: have I said anything that is avoidably ugly? A fix that makes a sentence stiffer than the fault it cured fails Rule 6. Undo it.
+- Final check on length: if the output is about the same length as the input and the input was heavy, look again. Simplicity that cuts nothing is usually a pass that stopped early. If the output is much shorter, check Step 2 again before trusting it.
 
 **Output:** return the edited text only, unless the user asks for a change summary. List any flagged vague attributions briefly after the text.
 
 ## Optional: the burstiness pass
 
-Off by default. Run it only when the user asks for it ("add burstiness", "vary the rhythm", or the option switched on where the skill is offered as an app). It suspends exactly two standing rules: preserve the draft's shape, and do not manufacture variety the draft does not have. Every other rule in this file still binds, and the Step 1 content invariant is untouched.
+Off by default. Run it only when the user asks for it ("add burstiness", "vary the rhythm", or the option switched on where the skill is offered as an app). Sentence splitting and joining are already part of the normal pass. This pass goes further on rhythm alone: it varies sentence openings and paragraph lengths on purpose, even where the plain pass would leave them.
 
 What the pass may do:
 
-- Split one long sentence into two, or join two short ones, where the rhythm asks for it.
 - Vary sentence openings so three in a row never share the same grammatical shape.
 - Move a sentence break so paragraph lengths vary, from a single sentence to about six.
+- Let a short sentence stand alone for weight where the writer's point earns it.
 
 What it still may not do:
 
 - Add a specific detail, example, or number the draft does not contain. Real burstiness comes from real detail. Invented detail is fabrication, not rhythm.
 - Reorder paragraphs, change the register, or touch protected spans.
-- Change what the text is. The pass varies how the sentences run, and nothing more.
+- Bring back a detail the relevance cut removed, or cut a load-bearing fact for rhythm.
 
-Run Steps 2 and 3 first, then this pass, then the Step 4 verification as usual. If the user asks for a change summary, state that the burstiness pass ran.
+Run Steps 3 to 5 first, then this pass, then the Step 6 verification as usual. If the user asks for a change summary, state that the burstiness pass ran.
 
 ## Gotchas
 
+- **Cutting the qualifier.** "The treatment may help some patients" cut to "The treatment helps patients" is not simplicity. It is a stronger claim than the writer made. Hedges that change certainty are load-bearing.
+- **Cutting the condition.** "If the payment clears, we ship Friday" cut to "We ship Friday" drops the fact the reader most needs. Conditions stay.
+- **Relevance without context.** A detail that looks spare in isolation may be the point in the reader's context. When in doubt, keep it. A kept extra detail costs a line. A cut needed detail costs the reader.
 - **Over-editing into blandness.** Removing AI jargon does not mean stripping legitimate domain terms. *Semantic layer*, *gradient descent*, and *latency* stay.
-- **Meaning drift in paraphrase.** Rewriting a complex sentence can invert cause and effect or drop a qualifier. The Step 4 re-read exists for this.
+- **Summarizing by accident.** If whole points are disappearing, the pass has left editing and become summarizing. Restore the points. Cut only the weight around them.
+- **Meaning drift in paraphrase.** Rebuilding a complex sentence can invert cause and effect or drop a qualifier. The Step 6 re-read exists for this.
 - **Connector swaps.** Replacing "Moreover" with "Furthermore" at every sentence start still reads like a machine. Logical order first, connectors second.
 - **Register drift.** Editing often slides text toward casual. Check formality against the source, not against a generic idea of natural.
 - **Stale list.** The banned list changes. Read it fresh on every edit job.
