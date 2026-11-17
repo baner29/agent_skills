@@ -10,6 +10,7 @@ A curated collection of production agent skills for AI coding agents (Claude Cod
 | :--- | :--- | :--- |
 | 🤖 [`gcp-enterprise-agentic-rag`](./gcp-enterprise-agentic-rag/) | Scaffold, configure, self-validate, and deploy serverless multi-agent systems on Google Cloud Platform with ADK, Vertex AI Agent Runtime, persistent memory banks, Cloud DLP PII sanitization, BigQuery ML summarization, and Vertex AI Search. | `npx skills add baner29/agent_skills --skill gcp-enterprise-agentic-rag` |
 | ✍️ [`scribeme`](./scribeme/README.md) | Write architecture documents, decision records, operational runbooks, and service briefs with Mermaid diagrams and a document linter. | `npx skills add baner29/agent_skills --skill scribeme` |
+| 🪶 [`orwell`](./orwell/) | The last pass over a finished draft. Turns AI-generated or AI-assisted text into simple, plain English by removing machine words, needless complexity, and details that add nothing in context, while keeping every point the reader needs. | `npx skills add baner29/agent_skills --skill orwell` |
 
 There are many agents skills being developed and released at a rapid scale by community contributors. Our aim is to ensure the skills we release solve production grade problems. Stay tuned for more exicting releases soon.
 
@@ -91,6 +92,12 @@ agent_skills/
 │   ├── references/               # Document and diagram guides
 │   ├── scripts/                  # Document validator
 │   └── evals/                    # Sample documents and evaluation runner
+├── orwell/
+│   ├── SKILL.md                  # Agent instructions and metadata
+│   ├── README.md                 # Purpose, pitch, and usage guide
+│   ├── poster.png                # Wordmark poster
+│   ├── references/               # Editing guides and the banned word list
+│   └── scripts/                  # Banned-pattern scanner
 └── evals/
     ├── triggers/                 # Queries that should or shouldn’t match
     ├── quality/                  # Test prompts and assertions
