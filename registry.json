@@ -25,6 +25,22 @@
       "install": {
         "npx": "npx skills add baner29/agent_skills --skill gcp-enterprise-agentic-rag"
       }
+    },
+    {
+      "name": "orwell",
+      "path": "orwell",
+      "description": "The last pass over a finished draft. Turns AI-generated or AI-assisted text into simple, plain English by removing machine words, needless complexity, and details that add nothing in context, while keeping every point the reader needs.",
+      "category": "writing",
+      "tags": [
+        "writing",
+        "editing",
+        "plain-english",
+        "humanize",
+        "simplification"
+      ],
+      "install": {
+        "npx": "npx skills add baner29/agent_skills --skill orwell"
+      }
     }
   ]
 }
