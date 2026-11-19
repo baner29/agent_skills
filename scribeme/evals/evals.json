@@ -74,12 +74,17 @@
       "assertions": [
         "Structures procedure with Prerequisites, Step-by-Step, and Verification",
         "Applies safety alert hierarchy with explicit hazard, consequence, and required action",
-        "Contains imperative, numbered step commands with expected outputs",
+        "Uses numbered actions with observable acceptance gates; does not fabricate commands or successful output when environment controls are unknown",
         "Invisible scaffolding: zero quoting of IEC/IEEE 82079 or ISO 20607 standards",
         "Zero methodology meta-text or prompt echoing (no claims of reflecting source code, no instruction echoes)",
         "Zero Wikipedia AI writing markers (no trailing -ing commentary, puffery, or rule-of-threes)",
         "Stores documentation in documentation/ directory (or user-specified folder)",
-        "Passes doc_validator.py without errors"
+        "Passes doc_validator.py without errors",
+        "Challenges zero-downtime assumptions and states the actual write interruption",
+        "Uses a supported migration mechanism with current authoritative technical references",
+        "Fences every source writer before fresh zero-lag measurements and data reconciliation; missing telemetry blocks promotion",
+        "Distinguishes pre-promotion abort from post-destination-write recovery; prohibits blind endpoint reversal",
+        "Labels missing environment controls as prerequisites and requires a rehearsal and backup restore drill"
       ]
     }
   ]
